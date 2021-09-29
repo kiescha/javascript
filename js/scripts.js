@@ -1,11 +1,8 @@
-let myName = 'Bob';
-document.write(myName);
-myName = 'John Doe';
-document.write(myName);
-
-let add = 2+8;
-document.write(add);
-
-let size=12;
-let double=size*2;
-document.write(double);
+let tasty = 'hamburger';
+document.write (tasty);
+let ingridient1 = 'meat';
+let ingridient2 = 'cheese';
+let ingridient3 = 'tomato';
+let ingridient4 = 'bread'
+let allingridients = ingridient1 + ingridient2 + ingridient3 + ingridient4;
+document.write (allingridients);
