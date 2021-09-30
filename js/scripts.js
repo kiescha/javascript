@@ -1,9 +1,30 @@
-alert('Hello')
-let tasty = 'hamburger ';
-document.write (tasty);
-let ingridient1 = 'meat ';
-let ingridient2 = 'cheese ';
-let ingridient3 = 'tomato ';
-let ingridient4 = 'bread '
-let allingridients = ingridient1 + ingridient2 + ingridient3 + ingridient4;
-document.write (allingridients);
+alert('Watch out! Pokedex Incoming!')
+let pokemonList=[
+  {name:'Balbasaur', height: 0.7, type:['grass','poison']},
+  {name:'Metapod', height: 0.7, type:'bug'},
+  {name:'Beedrill', height:1, type:['bug', 'poison']}
+];
+/* Wich is better? i dont know yet!
+let pokemonList=[
+  {
+    name:'Balbasaur',
+    height: 0.7,
+    type:[
+      'grass',
+      'poison'
+    ]
+  },
+  {
+    name:'Metapod',
+    height: 0.7,
+    type:'bug'
+  },
+  {
+    name:'Beedrill',
+    height:1,
+    type:[
+      'bug',
+      'poison'
+    ]
+  }
+];*/
