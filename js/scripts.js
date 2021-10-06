@@ -1,25 +1,42 @@
 //alert('Watch out! Pokedex Incoming!')
-let pokemonList=[
-  {
-    name:'Balbasaur',
-    height: 0.7,
-    type:['grass','poison']
-  },
-  {
-    name:'Metapod',
-    height: 0.7,
-    type:'bug'
-  },
-  {
-    name:'Beedrill',
-    height:1,
-    type:['bug', 'poison']
-  }
-];
-pokemonList.forEach(function(pokemon) {
-  if (pokemon.height < 0.9) {
-    document.write('<p>'+ pokemon.name +' (Height:'+ pokemon.height+')' + '</p>')
+let pokemonRepository = (function () {
+  let pokemonList = [
+    {
+      name:'Balbasaur',
+      height: 0.7,
+      type:['grass','poison']
+    },
+    {
+      name:'Metapod',
+      height: 0.7,
+      type:'bug'
+    },
+    {
+      name:'Beedrill',
+      height:1,
+      type:['bug', 'poison']
+    }
+  ];
+  pokemonList.forEach(function(pokemon) {
+    if (pokemon.height < 0.9) {
+      document.write('<p>'+ pokemon.name +' (Height:'+ pokemon.height+')' + '</p>')
+    } else {
+      document.write('<p>' + pokemon.name +' (Height:'+ pokemon.height+')' + ' Wow that\'s big!'+'</p>');
+    }
+  });
+
+  function add(pokemon) {
+    if (typeof pokemon === 'object') {
+    pokemonList.push(pokemon);
   } else {
-    document.write('<p>' + pokemon.name +' (Height:'+ pokemon.height+')' + ' Wow that\'s big!'+'</p>');
+    document.write('not a pokemon')};
+}
+  function getAll() {
+    return pokemonList;
   }
-});
+
+  return {
+    add: add,
+    getAll: getAll
+  };
+})();
