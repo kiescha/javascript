@@ -16,10 +16,10 @@ let pokemonList=[
     type:['bug', 'poison']
   }
 ];
-for ( let i=0; i < pokemonList.length; i++){
-  if (pokemonList[i].height < 0.9){
-    document.write(pokemonList[i].name +' (Height:'+ pokemonList[i].height+')');
+pokemonList.forEach(function(pokemon) {
+  if (pokemon.height < 0.9) {
+    document.write('<p>'+ pokemon.name +' (Height:'+ pokemon.height+')' + '</p>')
   } else {
-    document.write(pokemonList[i].name +' (Height:'+ pokemonList[i].height+')' + ' Wow that\'s big!');
+    document.write('<p>' + pokemon.name +' (Height:'+ pokemon.height+')' + ' Wow that\'s big!'+'</p>');
   }
-}
+});
