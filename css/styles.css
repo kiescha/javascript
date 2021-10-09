@@ -11,6 +11,19 @@ body {
     align-items: center;
     }
 .button-style{
-  border: 3px blue;
-  border-radius: 4px;
+  text-decoration: none;
+  border: none;
+  display: inline-block;
+  justify-content: center;
+  font-family: inherit;
+  background-color: #357b70;
+  color: white;
+  padding: 10px;
+  border-radius: 10px;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.8);
+  transition: 0.2s opacity;
+}
+button:hover, button:focus {
+  cursor: pointer;
+  opacity: 0.8;
 }

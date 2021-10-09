@@ -17,12 +17,36 @@ let pokemonRepository = (function () {
       type:['bug', 'poison']
     }
   ];
-  pokemonList.forEach(function(pokemon) {
-    document.querySelector('.pokemon-list');
+  function add(pokemon) {
+      if (typeof pokemon === 'object') {
+      pokemonList.push(pokemon);
+    } else {
+      document.write('not a pokemon')};
+  }
+    function getAll() {
+      return pokemonList;
+    };
+  function addListItem(pokemon){
+    let poList = document.querySelector('.pokemon-list');
     let listItem = document.createElement('li');
     let button = document.createElement('button');
+    button.addEventListener('click', function(){
+      showDetails(pokemon);
+    });
     button.innerText = pokemon.name;
     button.classList.add('button-style');
     listItem.appendChild(button);
-    pokemonList.appendChild(listItem);
+    poList.appendChild(listItem);
+  };
+  function showDetails(pokemon){
+    console.log(pokemon);
+  }
+    return {
+      add: add,
+      getAll: getAll,
+      addListItem: addListItem
+    };
+  })();
+  pokemonRepository.getAll().forEach(function (pokemon) {
+    pokemonRepository.addListItem(pokemon);
   });
