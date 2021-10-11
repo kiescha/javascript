@@ -29,7 +29,6 @@ let pokemonRepository = (function () {
   });
 }
   function loadList(){
-    displayLoadingGif();
     return fetch(apiUrl).then(function(response){
       return response.json();
     }).then(function(json){
