@@ -2,6 +2,8 @@
 let pokemonRepository = (function () {
   let pokemonList = [];
   let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
+  
+// This code will check if pokemon is a object.
   function add(pokemon) {
     if (typeof pokemon === 'object') {
       pokemonList.push(pokemon);
@@ -12,6 +14,7 @@ let pokemonRepository = (function () {
   function getAll() {
     return pokemonList;
   };
+// This code will create li and button for the pokemonList.
   function addListItem(pokemon) {
     let poList = document.querySelector('.pokemon-list');
     let listItem = document.createElement('li');
@@ -24,12 +27,15 @@ let pokemonRepository = (function () {
     listItem.appendChild(button);
     poList.appendChild(listItem);
   };
+
+// This code will display info about pokemons in modal.
   function showDetails(pokemon) {
     loadDetails(pokemon).then(function () {
       showModal(pokemon.name, pokemon.imageUrl, pokemon.height, pokemon.weight)
       console.log(pokemon);
     });
   }
+// This code will fetch info from json.
   function loadList() {
     return fetch(apiUrl).then(function (response) {
       return response.json();
@@ -45,6 +51,8 @@ let pokemonRepository = (function () {
       console.error(e);
     })
   };
+// This code will fetch details about pokemons like: img, height, type, weight.
+// i should consider to brig out types as well to modal, atm types is useless.
   function loadDetails(item) {
     let url = item.detailsUrl;
     return fetch(url).then(function (response) {
@@ -58,6 +66,7 @@ let pokemonRepository = (function () {
       console.error(e);
     });
   };
+// All modal Code for Pokedex
   let modalContainer = document.querySelector('#modal-container');
   function showModal(name, img, height, weight) {
 
