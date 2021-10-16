@@ -76,7 +76,21 @@ button:hover, button:focus {
 ul {
   columns: 4;
 }
+
 img {
   width: 200px;
   height: 200px;
 }
+@media all and (max-width: 500px) {
+ul {
+  columns: 2;
+}
+}
+/*@media all and (min-width: 500px) and (max-width: 750px) {
+
+}
+@media all and (max-width: 750px) {
+  h1 {
+  font-size: 22px;
+};
+}*/
