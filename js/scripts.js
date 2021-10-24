@@ -1,9 +1,8 @@
-//alert('Watch out! Pokedex Incoming!')
 let pokemonRepository = (function () {
   let pokemonList = [];
   let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
-  
-// This code will check if pokemon is a object.
+
+  // This code will check if pokemon is a object.
   function add(pokemon) {
     if (typeof pokemon === 'object') {
       pokemonList.push(pokemon);
@@ -14,7 +13,7 @@ let pokemonRepository = (function () {
   function getAll() {
     return pokemonList;
   };
-// This code will create li and button for the pokemonList.
+  // This code will create li and button for the pokemonList.
   function addListItem(pokemon) {
     let poList = document.querySelector('.pokemon-list');
     let listItem = document.createElement('li');
@@ -23,19 +22,23 @@ let pokemonRepository = (function () {
       showDetails(pokemon);
     });
     button.innerText = pokemon.name;
-    button.classList.add('button-style');
+    button.classList.add('btn', 'btn-success');
+    button.setAttribute('data-toggle', 'modal');
+    button.setAttribute('data-target', '#poModal');
+    listItem.classList.add('list-group-item');
+
     listItem.appendChild(button);
     poList.appendChild(listItem);
   };
 
-// This code will display info about pokemons in modal.
+  // This code will display info about pokemons in modal.
   function showDetails(pokemon) {
     loadDetails(pokemon).then(function () {
-      showModal(pokemon.name, pokemon.imageUrl, pokemon.height, pokemon.weight)
+      showModal(pokemon)
       console.log(pokemon);
     });
   }
-// This code will fetch info from json.
+  // This code will fetch info from json.
   function loadList() {
     return fetch(apiUrl).then(function (response) {
       return response.json();
@@ -51,8 +54,8 @@ let pokemonRepository = (function () {
       console.error(e);
     })
   };
-// This code will fetch details about pokemons like: img, height, type, weight.
-// i should consider to brig out types as well to modal, atm types is useless.
+  // This code will fetch details about pokemons like: img, height, type, weight.
+  // i should consider to brig out types as well to modal, atm types is useless.
   function loadDetails(item) {
     let url = item.detailsUrl;
     return fetch(url).then(function (response) {
@@ -66,56 +69,37 @@ let pokemonRepository = (function () {
       console.error(e);
     });
   };
-// All modal Code for Pokedex
-  let modalContainer = document.querySelector('#modal-container');
-  function showModal(name, img, height, weight) {
+  // All modal Code for Pokedex
 
-    modalContainer.innerHTML = '';
-    let modal = document.createElement('div');
-    modal.classList.add('modal');
+  function showModal(pokemon) {
+    let modalTitle = document.querySelector('.modal-title');
+    let modalBody = document.querySelector('.modal-body');
 
-    let closeButtonElement = document.createElement('button');
-    closeButtonElement.classList.add('modal-close');
-    closeButtonElement.innerText = 'Close';
-    closeButtonElement.addEventListener('click', hideModal)
+    modalTitle.innerHTML = '';
+    modalBody.innerHTML = '';
 
-    let titleElement = document.createElement('h1');
-    titleElement.innerText = name;
+    let title = document.createElement('h5');
+    title.innerHTML = pokemon.name;
 
-    let pokemonImage = document.createElement('img');
-    pokemonImage.src = img;
+    let poHeight = document.createElement('p');
+    poHeight.innerHTML = 'Height: ' + pokemon.height;
 
-    let pokemonWeight = document.createElement('p');
-    pokemonWeight.innerText = 'Weight: '+ weight;
+    let poTypes = document.createElement('p');
+    poTypes.innerHTML = 'Type: ' + pokemon.types;
 
-    let contentHeight = document.createElement('p');
-    contentHeight.innerText = 'Height: ' + height;
+    let poWeight = document.createElement('p');
+    poWeight.innerHTML = 'Weight: ' + pokemon.weight;
 
+    let poPic = document.createElement('img');
+    poPic.src = pokemon.imageUrl;
 
-
-    modal.appendChild(closeButtonElement);
-    modal.appendChild(titleElement);
-    modal.appendChild(pokemonImage);
-    modal.appendChild(contentHeight);
-    modal.appendChild(pokemonWeight);
-    modalContainer.appendChild(modal);
-
-    modalContainer.classList.add('is-visible');
+    modalTitle.append(title);
+    modalBody.append(poPic);
+    modalBody.append(poHeight);
+    modalBody.append(poWeight);
+    modalBody.append(poTypes);
   }
-  function hideModal() {
-    modalContainer.classList.remove('is-visible');
-    modalContainer.addEventListener('click', (e) => {
-      let target = e.target;
-      if (target === modalContainer) {
-        hideModal()
-      }
-    })
-  };
-  window.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && modalContainer.classList.contains('is-visible')) {
-      hideModal();
-    };
-  });
+
   return {
     add: add,
     getAll: getAll,
