@@ -113,6 +113,8 @@ let pokemonRepository = (function () {
       listPokemon.forEach(function(pokemon) {
         if (pokemon.innerText.toUpperCase().indexOf(value) < 0) {
           pokemon.style.display = "none";
+        } else {
+          pokemon.style.display = "";
         }        
       });
     });
