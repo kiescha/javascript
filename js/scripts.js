@@ -1,6 +1,7 @@
 let pokemonRepository = (function () {
   let pokemonList = [];
   let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
+  let searchInput = document.querySelector('#searchbar');
 
   // This code will check if pokemon is a object.
   function add(pokemon) {
@@ -61,7 +62,8 @@ let pokemonRepository = (function () {
     return fetch(url).then(function (response) {
       return response.json();
     }).then(function (details) {
-      item.imageUrl = details.sprites.front_default;
+      // item.imageUrl = details.sprites.front_default;
+      item.imageUrl = details.sprites.other.dream_world.front_default;
       item.height = details.height;
       item.types = details.types;
       item.weight = details.weight;
@@ -99,6 +101,17 @@ let pokemonRepository = (function () {
     modalBody.append(poWeight);
     modalBody.append(poTypes);
   }
+  //search bar
+    searchInput.addEventListener("input", function() {
+      let listPokemon = document.querySelectorAll("li");
+      let value = searchInput.value.toUpperCase();
+
+      listPokemon.forEach(function(pokemon) {
+        if (pokemon.innerText.toUpperCase().indexOf(value) < 0) {
+          pokemon.style.display = "none";
+        }        
+      });
+    });
 
   return {
     add: add,
