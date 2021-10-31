@@ -76,7 +76,11 @@ let pokemonRepository = (function () {
   function showModal(pokemon) {
     let modalTitle = document.querySelector('.modal-title');
     let modalBody = document.querySelector('.modal-body');
-
+    let theMap = pokemon.types;
+    let map = theMap.map(function(x){
+      return x.type.name;
+    });
+    
     modalTitle.innerHTML = '';
     modalBody.innerHTML = '';
 
@@ -87,7 +91,7 @@ let pokemonRepository = (function () {
     poHeight.innerHTML = 'Height: ' + pokemon.height;
 
     let poTypes = document.createElement('p');
-    poTypes.innerHTML = 'Type: ' + pokemon.types;
+    poTypes.innerHTML = 'Type: ' + map;
 
     let poWeight = document.createElement('p');
     poWeight.innerHTML = 'Weight: ' + pokemon.weight;
